@@ -1,8 +1,8 @@
-# 🚀 API Find Me🐾
+# 🚀 API EncontraPet🐾
 
 ## 📌 Sobre o Projeto
 
-### A API Find Me🐾 foi desenvolvida para cadastro de ONGs e de colaboradores que recebem e encaminham animais perdidos em cenários de enchentes, por exemplo:
+### A API EncontraPet🐾 foi desenvolvida para cadastro de ONGs e de colaboradores que recebem e encaminham animais perdidos em cenários de enchentes, por exemplo:
 
 - Sou ONG e quero abrigar animais;
 - Sou civil e encontrei algum animal em meio ás enchentes;
