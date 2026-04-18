@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",
-     "postinstall": "npm rebuild sqlite3",
+    "postinstall": "npm rebuild sqlite3",
     "start": "node server.js"
-     },
-     
+  
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,6 +19,12 @@
     "express": "^5.2.1",
     "nodemon": "^3.1.14",
     "sqlite": "^5.1.1",
-    "sqlite3": "^6.0.1"
+    "sqlite3": "^5.1.6"
+  },
+  "engines": {
+    "node": ">=0.10.3 <15"
+  },
+  "node": {
+    ">=0.10.3 <15": "node-sqlite3"
   }
 }
