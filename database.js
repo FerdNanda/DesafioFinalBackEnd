@@ -16,7 +16,7 @@ const criarBanco = async () => {
   await db.exec(`
     CREATE TABLE IF NOT EXISTS ongs (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      nome_ong TEXT,
+      nome_ong INTEGER,
       cnpj TEXT,
       email TEXT,
       telefone TEXT,
@@ -43,9 +43,13 @@ const criarBanco = async () => {
       foto TEXT,
       descricao TEXT,
       ong_id INTEGER,
-      FOREIGN KEY (ong_id) REFERENCES ongs(id) ON DELETE CASCADE
+      FOREIGN KEY (nome_ong) REFERENCES ongs(id) ON DELETE CASCADE
     )
   `);
+
+
+//===========TABELA DE ONGS================
+
 
   const checagem = await db.get("SELECT COUNT(*) AS total FROM ongs");
   if (checagem.total === 0) {
@@ -62,15 +66,17 @@ const criarBanco = async () => {
     console.log("ONGs já existem no banco de dados.");
   }
 
+  //////TABELA DE PETS//////================
 
-
-  const todosOsPets = await db.all("SELECT * FROM pets");
-  console.table(todosOsPets);
+   const todosOsPets = await db.all("SELECT * FROM pets");
+   console.table(todosOsPets);
 
   const checagemPets = await db.get(`SELECT COUNT(*) AS total FROM pets`);
+
   if (checagemPets.total === 0) {
+
     await db.exec(`INSERT INTO pets('especie','raca','idade_aproximada','sexo','status','foto','descricao','ong_id') VALUES
-     
+      ('Cachorro','Vira-lata',2,'Macho','aguardando adoção','https://example.com/pet1.jpg','pelagem preta, olhos castanhos, dócil','1'),
       ('Gato','Siamês',6,'Fêmea','recebendo medicação','https://example.com/pet2.jpg','pelagem marrom clara, olhos azuis, dócil','3'),
       ('Cavalo','indefinida',7,'Macho','em tratamento','https://example.com/pet3.jpg','pelagem castanha, crina longa, mancha branca na testa','1'),
       ('Gato','SRD',1,'Fêmea','aguardando familiares','https://example.com/pet4.jpg','pelagem cinza, olhos verdes, arrisca','2'),
@@ -84,24 +90,14 @@ const criarBanco = async () => {
     console.log("Pets já existem no banco de dados.");
   }
 
-  const todosOsPetsAtualizados = await db.all("SELECT * FROM pets");
-  console.table(todosOsPetsAtualizados);
-
-  //  await db.exec(`DELETE FROM pets WHERE id = `);   
-  
+ 
 
 
 
-
-return db;
-
-
-
-
-
+  return db;
 
 
  };
 
+
 module.exports = { criarBanco };
-criarBanco();
