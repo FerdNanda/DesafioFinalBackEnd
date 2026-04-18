@@ -7,22 +7,15 @@ const app = express();
 
 app.use(cors());
 
-app.use(express.json());
+app.use(express.static());
 
 //===============================ROTA PRINCIPAL
 
 app.get("/", (req, res) => {
-  res.send("Bem-vindo à API de Localização de Animais!");
+  res.sendFile(__dirname + "/public/index.html");
 });
 
-//===============================CRIANDO A PORTA DO SERVIDOR
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  
-  console.log(`Servidor rodando na porta  http://localhost:${PORT}`);
-});
 
 
 //===============================LISTAGEM DE ONGS
@@ -155,4 +148,15 @@ app.delete("/pets/:id", async (req, res) => {
   );
 
   res.send(`o pet ${id} deletado com sucesso!`);
+});
+
+
+
+//===============================CRIANDO A PORTA DO SERVIDOR
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  
+  console.log(`Servidor rodando na porta  http://localhost:${PORT}`);
 });
