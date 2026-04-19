@@ -5,16 +5,24 @@ const cors = require("cors");
 
 const app = express();
 
+const path = require('path');
+
+
+
 app.use(cors());
 
-app.use(express.static());
+app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "public"))
+);
 
 //===============================ROTA PRINCIPAL
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
-});
-
+  res.send(`
+    <h1> API EncontraPet </h1>
+    `)
+  });
 
 
 
@@ -25,7 +33,7 @@ app.get("/ongs", async (req, res) => {
 
   const ongs = await db.all("SELECT * FROM ongs");
 
-  res.json(ongs);
+  res.send(ongs);
 });
 
 //===============================LISTAGEM DE PETS
@@ -34,7 +42,7 @@ app.get("/pets", async (req, res) => {
 
   const pets = await db.all("SELECT * FROM pets");
 
-  res.json(pets);
+  res.send(pets);
 });
 
 
@@ -54,7 +62,7 @@ app.post("/ongs", async (req, res) => {
     [nome_ong, cnpj, email, telefone, endereco, cidade, estado, site, descricao, status]
   );
 
-  res.json("Ong criada com sucesso!");
+  res.send("Ong criada com sucesso!");
 });
 
 
@@ -72,7 +80,7 @@ app.post("/pets", async (req, res) => {
         [especie, raca, idade_aproximada, sexo, status, foto, descricao, ong_id]
     );
 
-    res.json("Pet criado com sucesso!");
+    res.send("Pet criado com sucesso!");
 });
 
 
@@ -115,7 +123,7 @@ app.put("/pets/:id", async (req, res) => {
     [status, id],
   );
 
-  res.json(`Status do pet ${id} atualizado com sucesso`);
+  res.send(`Status do pet ${id} atualizado com sucesso`);
 });
 
 
